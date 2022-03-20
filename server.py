@@ -12,7 +12,6 @@ host = socket.gethostbyname(socket.gethostname())
 port = 9999
 # bind to the port
 serversocket.bind((host, port))
-# queue up to 5 requests
 def handle_client(clientsocket,adr):
     while True:
         try:
@@ -35,9 +34,9 @@ def handle_client(clientsocket,adr):
                 clientsocket.sendall(bytes('Got None',encoding='utf-8'))
         except :
             clientsocket.close()
-        
-counter = 0
+            
 def run_server():
+    #queue up to 10 maximun clients
     serversocket.listen(10)
     while True:
         #establish a connection
@@ -51,12 +50,3 @@ def run_server():
             sleep(3)
             sys.exit()
 run_server()
-        
-
-
-
-    
-   
-    
-    
-
