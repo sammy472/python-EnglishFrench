@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RS-IOT-WEB-SERVER</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        body{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #02203c;
+        }
+        nav {
+            width: 100%;
+            position: fixed;
+            top: 0px;
+            margin-bottom: auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            min-height: 8vh;
+            color: blue;
+            background-color: white;
+            font-family: 'Popins', sans-serif;
+            z-index: 1;
+        }
+
+        .logo {
+            color: #d3c2c2;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-size: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo>div {
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            background-color: red;
+            margin: 10px;
+        }
+
+        .navlinks {
+            display: flex;
+            width: 30%;
+            justify-content: space-around;
+        }
+
+        .navlinks a {
+            text-decoration: none;
+            letter-spacing: 2px;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+            color: blue;
+        }
+        .navlinks a:hover{
+            color: whitesmoke;
+        }
+        .navlinks li {
+            text-decoration: none;
+            list-style: none;
+            color: white;
+        }
+        .navlinks li:hover{
+            background-color: #02203c;
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: blue;
+            margin: 5px;
+            transition: all 0.4s ease;
+            opacity: 0.4;
+        }
+        .content-wrapper{
+            position: relative;
+            top: 90px;
+            max-width: 90%;
+            height: 70vh;
+            margin: 0px auto;
+            display: grid;
+            grid-template-columns: 1.5fr 3fr;
+            gap: 10px;
+        }
+        .buttons{
+            display: grid;
+            grid-template-rows: repeat(3,1fr);
+        }
+        .buttons a{
+            display: block;
+            margin: 5px;
+            cursor: pointer;
+            
+        }
+        .buttons button{
+            width: 100%;
+            height: 100%;
+            font-size: xx-large;
+            border: none;
+            border-radius: 10px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #d3c2c2;
+            transition: all 0.05s ease;
+        }
+        .buttons button:hover{
+            background-color: rgb(118, 147, 233);
+            color: #d3c2c2;
+
+        }
+        .circle{
+            position: relative;
+        }
+        .turn{
+            position: absolute;
+            top: 25%;
+            left: 55%;
+            margin: auto;
+            height:250px;
+            width: 250px;
+            border-radius: 50%;
+            background-color: #331616;
+            color: aqua;
+            font-size: 150px;
+            animation: turn 5s ease infinite ;
+            text-align: center;
+            padding-top: 40px;
+            
+        }
+        @keyframes turn {
+            from{
+                transform: rotate(-360deg);
+            }
+            to{
+                transform: rotateZ(360deg);
+            }
+           
+        }
+        @media screen and (max-width:1024px) {
+            .navlinks {
+                width: 50%;
+            }
+        }
+
+        @media screen and (max-width:720px) {
+            body {
+                overflow-x: hidden;
+            }
+            
+            .navlinks {
+                position: absolute;
+                right: 0px;
+                height: 92vh;
+                top: 8vh;
+                background-color: blueviolet;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 50%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+            }
+            .navlinks li {
+                opacity: 0;
+            }
+            .burger {
+                display: block;
+            }
+            .buttons{
+                display: none;
+            }
+            .turn{
+            top: 25%;
+            left: 15%;
+            }
+            .navlinks a {
+            letter-spacing: 2px;
+            margin: 2px;
+            padding: 2px;
+            color: whitesmoke;
+            }
+        }
+
+        .nav-active {
+            transform: translateX(0%);
+        }
+
+        @keyframes navLinkFade {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+
+        .toggle .line1 {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .toggle .line2 {
+            opacity: 0;
+        }
+
+        .toggle .line3 {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .footer {
+            width: 100%;
+            position: fixed;
+            bottom: 0px;
+            display: flex;
+            justify-content: center;
+            height: auto;
+            background-color: white;
+            color: #331616;
+            font-size: inherit;
+        }
+
+        .footer>h4 {
+            height: inherit;
+            width: inherit;
+            overflow-wrap: break-word;
+            text-align: center;
+        }
+
+        .hide-scroll {
+            overflow-y: hidden;
+        }
+        
+       
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <div class="dot"></div>
+            <h4>RABIAA & SAMMY</h4>
+        </div>
+        <ul class="navlinks">
+            <li style="padding: 15px 0px;border-radius: 6px;">
+                <a href="/">Home</a>
+            </li>
+            <li style="padding: 15px 0px;border-radius: 6px;">
+                <a href="/sonsors">Sensors</a>
+            </li>
+            <li style="padding: 15px 0px;border-radius: 6px;">
+                <a href="/motor">Motor</a>
+            </li>
+            <li style="padding: 15px 0px;border-radius: 6px;">
+                <a href="/led">LEDs</a>
+            </li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+
+    </nav>
+    <div class="content-wrapper">
+        <div class="buttons">
+            <a href="/sensors"><button>Sensors</button></a>
+            <a href="/motor"><button>Motor</button></a>
+            <a href="/led"><button>LEDs</button></a>
+        </div>
+        <div class="cirle">
+            <span class="turn">&#9775;</span>
+        </div>
+    </div>
+    <footer class="footer">
+        <h4>Copyright &copy; Sammy2022</h4>
+    </footer>
+    <script>
+        const navSlide = () => {
+        const bg = document.querySelector(".burger");
+        const nav = document.querySelector(".navlinks");
+        const navlinks = document.querySelectorAll("li");
+
+
+        bg.addEventListener("click", () => {
+            //toggle
+            nav.classList.toggle("nav-active");
+            //animate
+            const width = window.innerWidth;
+            nav.style.width = width + "px";
+            navlinks.forEach((links, index) => {
+                if (links.style.animation) {
+                    links.style.animation = '';
+                } else {
+                    links.style.animation = `navLinkFade 0.5s ease forwards ${index/5+1.5}s`;
+                };
+            });
+
+            //burger animation
+            bg.classList.toggle("toggle");
+            document.body.classList.toggle('hide-scroll');
+        });
+
+
+
+        }
+        navSlide();
+    </script>
+</body>
+</html>
